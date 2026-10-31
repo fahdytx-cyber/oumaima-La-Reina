@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For Oumaima</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fff6f9;
+    --pink-light:#ffd6e8;
+    --pink-mid:#ff9ec4;
+    --rose-deep:#e85c8a;
+    --plum:#4a2545;
+    --gold:#f4c95d;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; min-height:100vh;
+    background:var(--bg);
+    font-family:'Nunito',sans-serif;
+    color:var(--plum);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .stage{
+    position:fixed; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    flex-direction:column;
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  /* ---- Stage 1: the gift ---- */
+  #gift-stage{ cursor:pointer; }
+  .box{
+    width:150px; height:110px;
+    background:linear-gradient(180deg,var(--pink-mid),var(--rose-deep));
+    border-radius:14px;
+    position:relative;
+    box-shadow:0 18px 40px rgba(232,92,138,.35);
+    animation:bob 2.4s ease-in-out infinite;
+  }
+  .box::before, .box::after{
+    content:""; position:absolute; background:var(--gold);
+  }
+  .box::before{ left:50%; top:0; width:18px; height:100%; transform:translateX(-50%); }
+  .box::after{ top:50%; left:0; height:18px; width:100%; transform:translateY(-50%); }
+  .bow{
+    position:absolute; left:50%; top:-26px; transform:translateX(-50%);
+    width:46px; height:26px;
+  }
+  .bow::before,.bow::after{
+    content:""; position:absolute; top:0; width:22px; height:22px;
+    background:var(--gold); border-radius:50% 50% 50% 0;
+  }
+  .bow::before{ left:0; transform:rotate(45deg); }
+  .bow::after{ right:0; transform:rotate(-45deg); }
+  @keyframes bob{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+  .hint{
+    margin-top:34px; font-family:'Fredoka',sans-serif; font-size:1.05rem;
+    color:var(--rose-deep);
+  }
+
+  /* ---- Stage 2: the letter ---- */
+  #letter-stage{
+    opacity:0; pointer-events:none; transform:scale(.92);
+    padding:28px 18px; width:100%; overflow-y:auto; max-height:100vh;
+  }
+  #letter-stage.show{ opacity:1; pointer-events:auto; transform:scale(1); }
+  .card{
+    max-width:460px; width:100%; margin:0 auto;
+    background:#fff;
+    border-radius:22px;
+    padding:30px 28px 34px;
+    box-shadow:0 20px 50px rgba(232,92,138,.18);
+    text-align:center;
+  }
+  .kitty{ margin:0 auto 10px; display:block; }
+  h1{
+    font-family:'Fredoka',sans-serif;
+    font-weight:600; font-size:1.55rem;
+    color:var(--rose-deep);
+    margin:4px 0 16px;
+  }
+  p{ line-height:1.6; font-size:1rem; margin:0 0 13px; text-align:left; }
+  .signature{ font-style:italic; color:var(--pink-mid); margin-top:18px; text-align:center; }
+  button{
+    margin-top:20px; border:none; cursor:pointer;
+    background:var(--rose-deep); color:#fff;
+    font-family:'Nunito',sans-serif; font-weight:600; font-size:.98rem;
+    padding:13px 26px; border-radius:999px;
+    transition:transform .2s ease, background .2s ease;
+  }
+  button:hover{ background:var(--plum); transform:translateY(-2px); }
+  .thanks{
+    margin-top:16px; font-family:'Fredoka',sans-serif;
+    color:var(--rose-deep); font-size:1.05rem; display:none;
+  }
+  .thanks.show{ display:block; }
+
+  .heart{
+    position:fixed; bottom:-20px; font-size:1.3rem; pointer-events:none;
+    animation:rise 3.2s ease-in forwards;
+  }
+  @keyframes rise{
+    0%{ transform:translateY(0) scale(.8); opacity:1; }
+    100%{ transform:translateY(-100vh) scale(1.1); opacity:0; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="stage" id="gift-stage" onclick="openGift()">
+    <div class="box"><div class="bow"></div></div>
+    <div class="hint">tap the box, i dare you</div>
+  </div>
+
+  <div class="stage" id="letter-stage">
+    <div class="card">
+      <svg class="kitty" width="104" height="90" viewBox="0 0 104 90">
+        <ellipse cx="52" cy="50" rx="40" ry="34" fill="#fff" stroke="#f3b8cf" stroke-width="3"/>
+        <path d="M18 34 Q10 6 34 20 Z" fill="#fff" stroke="#f3b8cf" stroke-width="3"/>
+        <path d="M86 34 Q94 6 70 20 Z" fill="#fff" stroke="#f3b8cf" stroke-width="3"/>
+        <path d="M24 30 Q18 12 34 22 Z" fill="#ffd6e8"/>
+        <path d="M80 30 Q86 12 70 22 Z" fill="#ffd6e8"/>
+        <circle cx="38" cy="48" r="3.5" fill="#4a2545"/>
+        <circle cx="66" cy="48" r="3.5" fill="#4a2545"/>
+        <ellipse cx="52" cy="58" rx="4" ry="3" fill="#f4a0bd"/>
+        <path d="M30 58 Q18 56 8 58 M30 62 Q18 63 8 66 M74 58 Q86 56 96 58 M74 62 Q86 63 96 66" stroke="#e8a3bf" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <circle cx="26" cy="62" r="6" fill="#ffd6e8" opacity=".7"/>
+        <circle cx="78" cy="62" r="6" fill="#ffd6e8" opacity=".7"/>
+        <g transform="translate(75,18)">
+          <path d="M0 6 L13 0 L13 12 Z" fill="#f4c95d"/>
+          <path d="M0 6 L-13 0 L-13 12 Z" fill="#f4c95d"/>
+          <circle cx="0" cy="6" r="4" fill="#e85c8a"/>
+        </g>
+      </svg>
+      <h1>Hi, it's me. The idiot.</h1>
+      <p>So. Turns out ragebaiting you was not, in fact, the elite bonding activity I imagined it would be. Groundbreaking research, I know.</p>
+      <p>I poked the bear. The bear was right to roar. I'm sorry for being annoying on purpose — 10/10 execution, 0/10 idea.</p>
+      <p>You're fully allowed to still be mad. I'll even hold your popcorn while you replay the argument in your head one more time for dramatic effect.</p>
+      <p>But I really didn't mean to actually hurt you, just to be a little pest, and I overdid the "little pest" part. I'm sorry. For real this time.</p>
+      <p class="signature">forgive your resident menace? 🎀</p>
+      <button onclick="forgive()">yes, you're forgiven (for now)</button>
+      <div class="thanks" id="thanks">phew. crisis averted. menace levels will now be reduced by at least 40%. 💕</div>
+    </div>
+  </div>
+
+<script>
+function openGift(){
+  const gift = document.getElementById('gift-stage');
+  const letter = document.getElementById('letter-stage');
+  gift.style.opacity = 0;
+  gift.style.transform = 'scale(1.15)';
+  setTimeout(()=>{ gift.style.display='none'; letter.classList.add('show'); }, 650);
+}
+function forgive(){
+  document.getElementById('thanks').classList.add('show');
+  for(let i=0;i<14;i++){
+    setTimeout(()=>{
+      const h = document.createElement('div');
+      h.className='heart';
+      h.textContent = ['💕','🎀','✨'][Math.floor(Math.random()*3)];
+      h.style.left = Math.random()*100+'vw';
+      h.style.fontSize = (1+Math.random())+'rem';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(), 3300);
+    }, i*90);
+  }
+}
+</script>
+</body>
+</html>
